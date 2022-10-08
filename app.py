@@ -1,11 +1,11 @@
+from ide.controller import Controller
+from ide.model import Model
 from ide.view import View
 
 def main():
     view = View()
-    # init model
-    # init view
-    # init controller(model, view)
-    # register controller to view
+    model = Model()
+    controller = Controller(model, view)
     pass
     
 if __name__ == "__main__":
