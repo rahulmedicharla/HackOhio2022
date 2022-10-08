@@ -1,12 +1,21 @@
 from abc import ABC
 from typing import List
-import PyObjects_interface
 
 class PyObject(ABC):
     '''Python Object Block'''
     pass
 
 class PyObjects:
+    class Statement(PyObject):
+        '''Statement -> string containing code'''
+        def __init__(self, statement: str) -> None:
+            super().__init__()
+            
+            self._statement = statement
+            
+        @property
+        def statement(self) -> str:
+            return self._statement
     class Block(PyObject):
         '''Block containing list of child PyObjects'''
         def __init__(self, children: List[PyObject]) -> None:
@@ -22,16 +31,17 @@ class PyObjects:
         def __init__(self, condition: str, block: PyObject) -> None:
             super().__init__()
             
-            self._condition: str
-            self._block: PyObject
+            self._condition = condition
+            self._block = block
         
         @property
-        def condition(self) -> str:
-            return self._condition
+        def conditional(self) -> str:
+            return f'if {self._condition}:'
         
         @property
         def block(self) -> PyObject:
             return self._block
+        
         
     class IfElse(PyObject):
         '''If Else block containing condition, if Block, else Block'''
@@ -43,8 +53,12 @@ class PyObjects:
             self._else_block: else_block
             
         @property
-        def condition(self) -> str:
-            return self._condition
+        def conditional(self) -> str:
+            return f'if {self._condition}:'
+        
+        @property
+        def else_str() -> str:
+            return 'else:'
         
         @property
         def if_block(self) -> PyObject:
@@ -63,30 +77,39 @@ class PyObjects:
             self._block = block
             
         @property
-        def condition(self) -> str:
-            return self._condition
+        def conditional(self) -> str:
+            return f'while {self._condition}:'
         
         @property
         def block(self) -> PyObject:
             return self._block
         
-    class Method(PyObject):
-        '''Method containing args, Method block, and return'''
-        def __init__(self, block: PyObject, return_obj: str, *args: List[str]) -> None:
+    class For(PyObject):
+        '''For containing start, end, and For block'''
+        def __init__(self, start: int, end: int, block: PyObject) -> None:
             super().__init__()
             
+            self._start = start
+            self._end = end
             self._block = block
-            self._return_obj = return_obj
-            self._args = args
             
+        @property
+        def start(self) -> int:
+            return self._start
+
+        @property
+        def end(self) -> int:
+            return self._end
+        
+        @property
+        def conditional(self) -> int:
+            if self._start:
+                return f'for i in range({self._start, self._end})'
+            else:
+                return f'for i in range({self._end})'
+        
         @property
         def block(self) -> PyObject:
             return self._block
         
-        @property
-        def return_obj(self) -> str:
-            return self._return_obj
-
-        @property
-        def args(self) -> List[str]:
-            return self.args
+        
