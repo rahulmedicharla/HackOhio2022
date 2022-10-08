@@ -1,21 +1,53 @@
 import speech_recognition as sr
 import pyaudio
+import time
 #import webbrowser as wb
 
-r = sr.Recognizer()
+r1= sr.Recognizer()
+r2 = sr.Recognizer()
 
-toggle_mic = False
+mic1 = sr.Microphone()
+mic2 = sr.Microphone()
 
-#gets the speech over a given time interval in seconds (dur)
-def get_speech_over_duration(dur):
+def listen_indefinitely():
+    while(True):
 
-    with sr.Microphone() as source:
-        print("Listening...")
-        audio_data = r.record(source, duration=dur)
-        print("Interpreting...")
-        audio = r.recognize_google(audio_data)
-        #print(audio)
+        with mic1 as source1:
+            r1.adjust_for_ambient_noise(source1)
+            cue = r1.listen(source1)
 
-    return audio
+            try:
+                command=r1.recognize_google(cue)
+                if(command=="edit"):
+                    print("Entering edit mode")
+                    time.sleep(2)
+                    while(True):
+                        print("what do you want to code?")
+                        with mic2 as source2:
+                            r2.adjust_for_ambient_noise(source2)
+                            audio_data = r2.listen(source2)
 
-print(get_speech_over_duration(10))
+                            try:
+                                audio = r2.recognize_google(audio_data)
+                                if(audio=="exit"):
+                                    print("Exiting edit mode")
+                                    break
+                                else:
+                                    print(audio)
+
+                            except sr.UnknownValueError:
+                                continue
+                            except sr.RequestError:
+                                continue
+
+          
+            except sr.UnknownValueError:
+                continue
+            except sr.RequestError:
+                continue
+
+                
+
+
+listen_indefinitely()
+
