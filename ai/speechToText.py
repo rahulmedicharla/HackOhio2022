@@ -11,12 +11,13 @@ r1= sr.Recognizer()
 r2 = sr.Recognizer()
 
 
-HOT_WORDS = ("while", "for", "variable", "if", "close", "else", "call")
+HOT_WORDS = ("while", "for", "variable", "if", "close", "else", "call", "import", "from")
 
 DECLARATIVE_WORDS = {"create a variable":"variable","declare":"variable","initialize":"variable","make":"variable", "while":"while"}
 
-OPERATIONS = {"plus":"+","minus":"-","times":"*","divided by":"/","mod":"%","less than or equal to":"<=","less than":"<",
-    "greater than or equal to":">=","greater than":">","equivalent":"==","as":"=","equals":"=","not equal to":"!=","negation of":"!="}
+OPERATIONS = {"plus":"+","minus":"-","times":"*","divided by":"/","mod":"%","to the power of":"**","squared":"** 2" , "cubed":"** 3","less than or equal to":"<=","less than":"<",
+    "greater than or equal to":">=","greater than":">","equivalent":"==","as":"=","equals":"=","equal":"=","not equal to":"!=","negation of":"!=", "true":"True", "false":"False",
+    "quit":"exit","leave":"end","stop editing":"exit","quit editing":"exit","quit edit":"exit","start edit":"edit", "prince":"print","sprint":"print","loop":"for", "underscore":"_"}
 
 NUMBERS = {
     'one': '1','two': '2','to':'2','three': '3','four': '4','five': '5','six': '6','seven': '7','eight': '8','nine': '9','zero': '0'}
