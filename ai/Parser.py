@@ -14,7 +14,8 @@ class TextToCode():
         var_value = tokens.pop(0)
 
         var = PyObjects.Variable(code_dict.scope, var_name, var_value)
-        code_dict.scope.block.insert_child(var)
+
+        var.parent.insert_child(var)
         action(var)
 
     def parse_statement(tokens: list[str], code_dict: dict, action: Callable):
@@ -55,6 +56,8 @@ class TextToCode():
 
         action(if_else_block)
 
+        code_dict.scope = code_dict[code_dict.line_count]
+
     def parse_while(tokens: list[str], code_dict: dict, action: Callable):
         if not tokens:
             return
@@ -73,12 +76,14 @@ class TextToCode():
             return
 
         tokens.pop(0)
+        var_name = tokens.pop(0)
+        tokens.pop(0)
         start = tokens.pop(0)
         tokens.pop(0)
         end = tokens.pop(0)
 
         for_block = PyObjects.For(
-            code_dict.scope,  start, end, PyObjects.Block(None, []))
+            code_dict.scope, var_name, start, end, PyObjects.Block(None, []))
         for_block.set_block(PyObjects.Block(for_block, []))
         for_block.parent.insert_child(for_block)
 
@@ -99,6 +104,29 @@ class TextToCode():
 
         action(call_block)
 
+    def parse_function(tokens: list[str], code_dict: dict, action: Callable):
+        if not tokens:
+            return
+
+        tokens.pop(0)
+        name = tokens.pop(0)
+        args = ",".join(tokens[0:])
+
+        function_block = PyObjects.Function(
+            code_dict.scope, name, args, PyObjects.Block(None, []))
+        function_block.set_block(PyObjects.Block(function_block, []))
+        function_block.parent.insert_child(function_block)
+
+        action(function_block)
+        code_dict.scope = code_dict[code_dict.line_count]
+
+    def parse_import(tokens: list[str], code_dict: dict, action: Callable):
+        tokens.pop(0)
+        package = tokens.pop(0)
+
+        import_block = PyObjects.Import(code_dict[1], package)
+        code_dict.insert(0, import_block)
+
     def back_out(tokens, code_dict, action):
         code_dict.scope = code_dict.scope.parent
 
@@ -115,7 +143,9 @@ T2C_jump = {
     "if": TextToCode.parse_if,
     "if else": TextToCode.parse_if_else,
     "call": TextToCode.parse_call,
-    "close": TextToCode.back_out
+    "close": TextToCode.back_out,
+    "import": TextToCode.parse_import,
+    "function": TextToCode.parse_function
 }
 
 
@@ -151,6 +181,14 @@ class CodeToText():
         action(f'{for_block.indentation}{for_block.condition}')
         CodeToText.parse_block(for_block.block, text_dict, action)
 
+    def parse_import(import_block: PyObject, text_dict):
+        text_dict.insert(0, import_block.package)
+
+    def parse_function(function_block: PyObject, text_dict: dict, action: Callable):
+        action(
+            f'{function_block.indentation}def {function_block.name}({function_block.args}):')
+        CodeToText.parse_block(function_block.block, text_dict, action)
+
     def parse(block: PyObject, text_dict: dict, action: Callable):
         return C2T_jump[type(block)](block, text_dict, action)
 
@@ -158,10 +196,12 @@ class CodeToText():
 C2T_jump = {
     PyObjects.Variable: CodeToText.parse_variable,
     PyObjects.Statement: CodeToText.parse_statement,
+    PyObjects.Function: CodeToText.parse_function,
     PyObjects.Block: CodeToText.parse_block,
     PyObjects.While: CodeToText.parse_while,
     PyObjects.For: CodeToText.parse_for,
     PyObjects.If: CodeToText.parse_if,
     PyObjects.IfElse: CodeToText.parse_if_else,
-    PyObjects.Call: CodeToText.parse_call
+    PyObjects.Call: CodeToText.parse_call,
+    PyObjects.Import: CodeToText.parse_import
 }

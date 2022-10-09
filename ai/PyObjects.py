@@ -215,11 +215,12 @@ class PyObjects:
     class For(PyObject):
         '''For containing start, end, and For block'''
 
-        def __init__(self, parent: PyObject, start: int, end: int, block: PyObject) -> None:
+        def __init__(self, parent: PyObject, var_name: str, start: int, end: int, block: PyObject) -> None:
             super().__init__()
 
             self.indentation = parent.indentation + 1
             self.parent = parent
+            self._var_name = var_name
             self._start = start
             self._end = end
             self._block = block
@@ -235,9 +236,9 @@ class PyObjects:
         @property
         def condition(self) -> int:
             if self._start:
-                return f'for i in range({self._start, self._end})'
+                return f'for {self._var_name} in range{int(self._start), int(self._end)}:'
             else:
-                return f'for i in range({self._end})'
+                return f'for {self._var_name} in range{int(self._end)}:'
 
         @property
         def block(self) -> PyObject:
@@ -300,4 +301,15 @@ class PyObjects:
 
         @property
         def call(self) -> str:
-            return f'{self._name}({self._args}):'
+            return f'{self._name}({self._args})'
+
+    class Import(PyObject):
+        def __init__(self, parent: PyObject, package: str) -> None:
+            super().__init__()
+
+            self.parent = parent
+            self.package = package
+
+        @ property
+        def package(self):
+            return f'import {self.package}'
