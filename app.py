@@ -8,12 +8,15 @@ from firebase_admin import credentials
 from firebase_admin import db
 
 def outputCode(event):
+    print(event.data)
+    if not event.data:
+        return
     with open("./ide/audioCode.py", "w") as file:
         for line in event.data:
             if line:
                 file.write(( int(line[0]) * "\t") + line[1:] + '\n')
     ide.view.open_file()
-    ide.view.outputLoading()
+    #ide.view.outputLoading()
     
 def runCode(event):
     if(event.data == 1):
