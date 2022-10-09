@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hackohio2022-1ccea",
+  "private_key_id": "704ebf41991362afa9d452bf726e5e4daf289a4c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDTDYfIKA/CPrtf\nJTP6k79TPWjSUH0GZ96PbNLq4pq806RmQ9k1rIvsG4gdiCVjvhJ63JOVSuUGeq4k\nk4PRq89CBrsEtJ1GHv+v4y/+kZ/rY+ZhhPOCRbSRNxh9F/Hijgf15YzPThv7kvHC\nwONxdwEamQKyGSyBPULlSng0EJ2yKz/tDvsA/6h98azXl5Q0AXLLmS2prafZ2wnJ\ndBz0ViMuu6g5dKxkj5P41lh/Ni0wVTBIVweHuNW4y+RT99F1h4+dH0w5I3KNc/q/\ng8I2iw2yrgpwcgUXIgJ0JS1EI4UfuRNCOaae/PcKbKFdzSFCGJhsCuCeFtEsAGtJ\n15PkOD9HAgMBAAECggEAHWyofpZfRBSc6PH14jyRExjfsVq5Y5g9pj9k1IyNSEA1\njnBtKxeIVn2sJ3ngxJwuVWTFSq4rahDWkJDkcuoCNlFb55cKykjuGuaQvWwuIJJH\n/1aa4JG5T/mfd2lMNurYX0cGr6xTKGrfO+jKjPordDra7lumIcqZtgAA7DlY0wsF\nxsCbKvbIHAWLRf5C3J3da1ch2glQd7UJxJ8X9OLW0gI2anhEInqWRW1y8mQW3vls\n9TezoqCrUaPnPzJF0s4dGgZohVs+psEhTB4/3kwUo017pMrxPkw7uM+chSRs0xbZ\njhbufQSl6tBfk1YTld5xT9Rb54v0zWtaMw3J2LUBaQKBgQDsdP//M1kcpGQaLA/A\nWN6e354fv1y6bi2yGd1Z6mPrZg64UYMtult3fyFx79ngdDrt5fElKS7tHTprv0C4\nuvUPyO8Wo2RlUOMwLDYNqYq5niluit2APTyevZa7rE1oqU4w60B7FG4w6/xu0Cx6\nZ479Gj68eAGVH2nvby5AB7LuxQKBgQDkfwY3Wn+LEiGHBwzcYHsq2xIGEMe1m7a3\nGLdUnuUyogKFI3Zd8nEOqYNauhY/XlF04fkmlXICxI1iMRjLbNL/z5trMJuqMXLW\ns0G2xuNGkJP+CTPbI8Qah2u/i8MdrlKL5/PbxopSI8DoAW97guyzfct56hKI+dbo\nYmF23rXWmwKBgDQ37mTkaRSLNVQWUPAwcBFz3s6yCv9c35iKX7jAq4pLwopv7eFG\nW3a7S56G0n3gDTeGZUfInYVdxA4RcXCaUQ5IWIyOTtiVEWcNDG7d9zXguNOhtSLh\n4yZHRidx+LJZWVwyR84mh+Mj6l5qeLgbcJdymVIzyl2tT07CJducF6blAoGAIRK5\nxZ1VxL11GOROWj+k1EktTK91GLZXNh1fu+Hb7v5AOyEs6uBCuQqUNrekrLtsMuza\ncVlETV5B0KqmmhtAV0KnjlZU0ceiha0gn+Id14LpyOVwGhINOoHLeMg0D8HBtPp3\n86HDN6xxKaO7jTcgJ8LXhuf4ktcG4lALJ3eI/m0CgYA+755fdCSjgdvfoVUkiYET\npsf/e6Skqh1Xe1e9VZery5I9rY/r1m56CLaNv0nBfmcCR8tfN0vyI83jzvrS4ekD\nxwQGI4vxSZx8Sz/gJyIcWY1lOpM+JbF6oFnlYursg8a74ylIeKxkaE1Lt9U6mSVw\nSZUPLt+/27FIfaxK/S/z2A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-697sw@hackohio2022-1ccea.iam.gserviceaccount.com",
+  "client_id": "104765866411214532934",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-697sw%40hackohio2022-1ccea.iam.gserviceaccount.com"
+}
