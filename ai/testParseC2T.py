@@ -15,8 +15,7 @@ def test():
 
     Parser.parse(main_block)
 
-    for line, code in Parser.code.items():
-        print(f'{line}    {code}')
+    print(Parser.code)
 
 
 test()
