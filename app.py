@@ -13,7 +13,7 @@ def outputCode(event):
             if line:
                 file.write(( int(line[0]) * "\t") + line[1:] + '\n')
     ide.view.open_file()
-    ide.view.updateGraphics()
+    ide.view.outputLoading()
     
 def runCode(event):
     if(event.data == 1):

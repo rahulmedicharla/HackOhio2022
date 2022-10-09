@@ -21,12 +21,15 @@ def open_file():
         editor.insert('1.0', code)
         set_file_path(path)
 
+def outputLoading():
+     code_output.insert('1.0', "Loading code from database")
 
 def save_as():
     file_path = "./ide/audioCode.py"
     with open(file_path, 'w') as file:
         code = editor.get('1.0', END)
         file.write(code)
+
 
 def openEditor():
     compiler.mainloop()
