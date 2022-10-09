@@ -1,13 +1,15 @@
 from PyObjects import PyObjects
 
+
 def add_to_dict(string):
     Parser.lines += 1
     Parser.code[Parser.lines] = string
-    
+
+
 class Parser:
     lines = 0
     code = {}
-    
+
     def parse_block(block):
         for child in block.children:
             Parser.parse(child)
@@ -36,11 +38,12 @@ class Parser:
     def parse(block):
         jump_table[type(block)](block)
 
+
 jump_table = {
-            PyObjects.Block: Parser.parse_block,
-            PyObjects.Statement: Parser.parse_statement,
-            PyObjects.If: Parser.parse_if,
-            PyObjects.IfElse: Parser.parse_if_else,
-            PyObjects.While: Parser.parse_while,
-            PyObjects.For: Parser.parse_for
-    }
+    PyObjects.Block: Parser.parse_block,
+    PyObjects.Statement: Parser.parse_statement,
+    PyObjects.If: Parser.parse_if,
+    PyObjects.IfElse: Parser.parse_if_else,
+    PyObjects.While: Parser.parse_while,
+    PyObjects.For: Parser.parse_for
+}
