@@ -19,7 +19,7 @@ Rahul Medicharla
 </ul>
 Jack Italiano
 <ul>
-<li>Developed Interpreter from pre-formatted strings to recursive object representations for easy access to the code.</li>
+<li>Developed Interpreter from pre-formatted strings to recursive object representations for easy access to code.</li>
 <li>Developed Interpreter from objects to python syntax using recursive decent parsing.</li>
 </ul>
 </ul>
