@@ -5,10 +5,7 @@ from firebase_admin import db
 
 class Model():
     def __init__(self):
-        self.cred = credentials.Certificate("firebaseConfig.json")
-        firebase_admin.initialize_app(self.cred, {
-            'databaseURL': 'https://hackohio2022-1ccea-default-rtdb.firebaseio.com/'
-        })
+        self.x = 0
     
     def setData(self, path, data):
         ref = db.reference(path)
