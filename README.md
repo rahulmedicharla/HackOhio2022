@@ -92,7 +92,12 @@ Speech recognition -> database input -> Interpret input to objects -> Parse obje
 
 **Custom IDE**
 <ol>
-<li>put your more in depth description here</li>
+<li>Event listener listens to changes in output data from database</li>
+<li>outputs line by line into our custom IDE</li>
+<ul>
+  <li>custom IDE is a ptyhon application with custom functions that can open, run, and save files</li>
+</ul>
+<li>listens for RUN command where python code is compiled and ran</li>
 </ol>
 
 
