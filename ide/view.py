@@ -1,69 +1,72 @@
+import os
 from tkinter import *
-from tkinter.filedialog import asksaveasfilename, askopenfilename
+from tkinter.filedialog import Open, asksaveasfilename, askopenfilename
 import subprocess
 
-class View():
-    def __init__(self):
-        self.compiler = Tk()
-        self.filePath = ''
-        self.editor = Text()
-        self.codeOutput = Text(height=10)
-
-        self.editor.pack()
-        self.codeOutput.pack()
-
-        self.initGUI()
-
-    def setFilePath(self, path):
-        self.filePath = path
+compiler = Tk()
+compiler.title('Audio Studio')
+file_path = ''
     
-    def initGUI(self):
-        self.compiler.title("Audio Studio")
 
-        menuBar = Menu(self.compiler)
-
-        fileMenu = Menu(menuBar, tearoff=0)
-        fileMenu.add_command(label='Open', command=self.openFile) 
-        fileMenu.add_command(label='Save As', command=self.saveAs)
-        fileMenu.add_command(label='Save', command=self.saveAs) 
-        menuBar.add_cascade(label='File', menu=fileMenu)
+def set_file_path(path):
+    global file_path
+    file_path = path
 
 
-        runBar = Menu(menuBar, tearoff=0)
-        runBar.add_command(label='Run', command=self.run)
-        menuBar.add_cascade(label='Run', menu=runBar)
+def open_file():
+    path = "./ide/audioCode.py"
+    with open(path, 'r') as file:
+        code = file.read()
+        editor.delete('1.0', END)
+        editor.insert('1.0', code)
+        set_file_path(path)
 
-        self.compiler.config(menu = menuBar)
+def outputLoading():
+     code_output.insert('1.0', "Loading code from database")
 
-        self.compiler.mainloop()
+def save_as():
+    file_path = "./ide/audioCode.py"
+    with open(file_path, 'w') as file:
+        code = editor.get('1.0', END)
+        file.write(code)
 
-    def openFile(self):
-        path = askopenfilename(filetypes=[('Python Files', '*py')])
-        with open(path, 'r') as file:
-            code = file.read()
-            self.editor.delete('1.0', END)
-            self.editor.insert('1.0', code)
-            self.setFilePath(path)
 
-    def saveAs(self):
-        if(self.filePath == ''):
-            path = asksaveasfilename(filetypes=[('Python Files', '*py')])
-        else:
-            path = self.filePath
-        with open(path, 'w') as file:
-            code = self.editor.get('1.0', END)
-            file.write(code)
-            self.setFilePath(path)
+def openEditor():
+    compiler.mainloop()
 
-    def run(self):
-        if(self.filePath == ''):
-            savePromt = Toplevel()
-            text = Label(savePromt, text="Please save code to run")
-            text.pack()
-            return
-        command = f'python {self.filePath}'
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        output, error = process.communicate()
-        self.codeOutput.insert('1.0', output)
-        self.codeOutput.insert('1.0', error)
-    
+def updateGraphics():
+    compiler.update()
+
+def compileAndRun():
+    save_as()
+    run()
+
+def run():
+    code_output.insert('1.0', '')
+    command = f'python {file_path}'
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    output, error = process.communicate()
+    code_output.insert('1.0', output)
+    code_output.insert('1.0',  error)
+
+
+menu_bar = Menu(compiler)
+
+file_menu = Menu(menu_bar, tearoff=0)
+file_menu.add_command(label='Open', command=open_file)
+file_menu.add_command(label='Save', command=save_as)
+file_menu.add_command(label='Save As', command=save_as)
+menu_bar.add_cascade(label='File', menu=file_menu)
+
+
+run_bar = Menu(menu_bar, tearoff=0)
+run_bar.add_command(label='Run', command=compileAndRun)
+menu_bar.add_cascade(label='Run', menu=run_bar)
+
+compiler.config(menu=menu_bar)
+
+editor = Text()
+editor.pack()
+
+code_output = Text(height=10)
+code_output.pack()
