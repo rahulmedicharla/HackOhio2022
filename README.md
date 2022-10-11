@@ -61,9 +61,9 @@ The first step is to get speech to text data and clean the data into a standardi
 </ul>
 
 **Data Pipeline**
-<ol>
-<li>put your more in depth description here</li>
-</ol>
+<ul>
+Speech recognition -> database input -> Interpret input to objects -> Parse objects to code -> databse output -> custom IDE
+</ul>
 
 # Processes
 **Speech Recognition**
