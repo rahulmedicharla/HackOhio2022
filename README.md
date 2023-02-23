@@ -68,7 +68,8 @@ Speech recognition -> database input -> Interpret input to objects -> Parse obje
 # Processes
 **Speech Recognition**
 <ol>
-<li>put your more in depth description here</li>
+<li>Used the python Speech Recognition library and the google recognition engine to process phrases from the user</li>
+  <li>Send each string phrase to the data base input</li> 
 </ol>
 
 **Database**
